@@ -7,34 +7,47 @@ class IncrementDecrement{
 		float c;
 		double d;
 		char e;
-		// Applied to a standing alone variable the position of the increment/decrement signs don't make any difference:
+		// Applied to a standing alone variable the position of the increment/decrement signs don't make any difference
 		a++; // 2
 		System.out.println(a);
 		++a; // 3
 		System.out.println(a);
 		
-		// Inside an expression the position of the increment/decrement signs matter:
-		// To the left the increment/decrement is applied to it's variable first, and them used in the expression.
-		// To the right the variable is first used in the expression, and them the increment/decrement is applied to itself.
-		b = 10 * a++; // b = 30 and them a = 4
+		// Inside an expression the position of the increment/decrement signs matter
+		// To the left, the increment/decrement is applied to it's variable first, and them the variable's value is used.
+		// To the right, the current value of the variable is copied first, them the increment/decrement is applied to
+		// the variable, and after that the previous copied value is used (this "error" can be hidden by using double
+		// and fixed by using BigDecimal).
+		// Order summary:
+		// For ++x or --x: increment/decrement variable -> read in the memory -> use
+		// For x++ or x--: read in the memory -> save a copy in a temporarily slot -> increment/decrement variable -> use the copy
+		b = 10 * a++; // copy 3, a = 4, and them b = 30
 		System.out.println(b);
 		b = 10 * ++a; // a = 5 and them b = 50
 		System.out.println(b);
 		
 		// It works the same with float/double type variables:
-		c = ++a * 10.10f; // a = 6 and them c = 60.60, it appears as 60.600002 because of the fractional binary representation in float types, it is truncated and them multiplied by 6, leading to a rounded number near to 60.600002
+		c = ++a * 10.10f; // a = 6 and them c = 60.60, it appears as 60.600002 because of the fractional binary representation in
+		// float types, it is truncated and them multiplied by 6, leading to a rounded number near to 60.600002
 		System.out.println(c);
 		d = --a + 40.40; // a = 5 and them d = 45.4
 		System.out.println(d);
+		d = 10 * a++ + 5 * ++a; // copy 5, a = 6, 10 * 5, a = 7, 5 * 7, and them d = 85.0
+		System.out.println(d);
 		
-		//We can also increment/decrement char type variables
+		// We can also increment/decrement char type variables
 		e = 'C';
 		e--; // B
 		System.out.println(e);
 		
+		// This format is not allowed in this case because "1" is a Integer literal so we need "a" to be int or a bigger data type
+		// a = a + 1;
 		
-		
-		c=a+1; //in this case "1" is a literal so we need to use casting
-}
+		// References:
+		// https://docs.oracle.com/javase/specs/jls/se21/html/jls-4.html
+		// https://docs.oracle.com/javase/tutorial/java/nutsandbolts/op1.html
+		// https://docs.oracle.com/javase/specs/jls/se8/html/jls-15.html#jls-15.14
+		// https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/math/BigDecimal.html
+  }
 
 }
