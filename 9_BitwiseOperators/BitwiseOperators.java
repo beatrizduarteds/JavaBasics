@@ -1,7 +1,7 @@
 import java.lang.*;
 
 class BitwiseOperators{
-// Bitwise operations are faster, and can be performed only in Integer types.
+// Bitwise operations are faster, and can be performed only on Integer types.
 // In the background decimal literals/values are represented in binary (with 4 bytes for int, 1 byte for byte, etc), and the operation between two numbers is done on each pair of bits.
 // That's why 10ˇ6 is equal to 14.
 
