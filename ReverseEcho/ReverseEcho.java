@@ -34,7 +34,7 @@ public class ReverseEcho{
       ps.println(msg);
     }while(!msg.equals("dne"));  
     
-      
+    skt.close();
   }
 
 }
